@@ -22,6 +22,9 @@
                                     <constraint firstAttribute="height" constant="44" id="X3h-Nb-RBE"/>
                                 </constraints>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="words"/>
+                                <connections>
+                                    <outlet property="delegate" destination="BYZ-38-t0r" id="hlP-CC-5Zw"/>
+                                </connections>
                             </searchBar>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="iC7-bh-iSp">
                                 <rect key="frame" x="0.0" y="108" width="600" height="492"/>
@@ -32,16 +35,34 @@
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="cellIdentifier" id="CJ4-SB-BkX">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="cellIdentifier" id="CJ4-SB-BkX" customClass="CustomFlickerCell" customModule="iAppStreet_App" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="93" height="97"/>
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="AoI-te-Bf2">
+                                                    <rect key="frame" x="0.0" y="0.0" width="93" height="97"/>
+                                                </imageView>
+                                            </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
+                                        <constraints>
+                                            <constraint firstItem="AoI-te-Bf2" firstAttribute="top" secondItem="CJ4-SB-BkX" secondAttribute="top" id="CVb-dX-I3j"/>
+                                            <constraint firstItem="AoI-te-Bf2" firstAttribute="leading" secondItem="CJ4-SB-BkX" secondAttribute="leading" id="PdZ-dk-Fdz"/>
+                                            <constraint firstAttribute="trailing" secondItem="AoI-te-Bf2" secondAttribute="trailing" id="Yzy-hR-fBW"/>
+                                            <constraint firstAttribute="bottom" secondItem="AoI-te-Bf2" secondAttribute="bottom" id="rnR-dS-c4R"/>
+                                        </constraints>
+                                        <connections>
+                                            <outlet property="flickerImageview" destination="AoI-te-Bf2" id="fxB-6P-v1I"/>
+                                        </connections>
                                     </collectionViewCell>
                                 </cells>
+                                <connections>
+                                    <outlet property="dataSource" destination="BYZ-38-t0r" id="BS0-0x-4J8"/>
+                                    <outlet property="delegate" destination="BYZ-38-t0r" id="5oo-Jq-okD"/>
+                                </connections>
                             </collectionView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -58,6 +79,10 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Flicker Photos" id="yk1-mu-d7J"/>
+                    <connections>
+                        <outlet property="flickerCollectionView" destination="iC7-bh-iSp" id="ASF-ez-NqE"/>
+                        <outlet property="flickerSearchBar" destination="PTH-NJ-1BK" id="FrD-U1-WTH"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>

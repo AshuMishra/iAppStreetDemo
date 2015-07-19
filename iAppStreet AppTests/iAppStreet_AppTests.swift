@@ -2,7 +2,7 @@
 //  iAppStreet_AppTests.swift
 //  iAppStreet AppTests
 //
-//  Created by Susmita Horrow on 18/07/15.
+//  Created by Ashutosh Mishra on 18/07/15.
 //  Copyright (c) 2015 Ashutosh Mishra. All rights reserved.
 //
 

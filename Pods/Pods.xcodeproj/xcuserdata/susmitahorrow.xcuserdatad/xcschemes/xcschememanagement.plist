@@ -8,21 +8,49 @@
 		<dict>
 			<key>isShown</key>
 			<false/>
+			<key>orderHint</key>
+			<integer>3</integer>
+		</dict>
+		<key>Pods-IJReachability.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+			<key>orderHint</key>
+			<integer>4</integer>
+		</dict>
+		<key>Pods-SwiftyJSON.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+			<key>orderHint</key>
+			<integer>5</integer>
 		</dict>
 		<key>Pods.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
+			<key>orderHint</key>
+			<integer>2</integer>
 		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>12D710433FE75A417F0B7FC8</key>
+		<key>0650CC2EE0E723378D00DE5C</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>DA88EE687D12989C65A7787A</key>
+		<key>07C9F59880057B3DB7D648E7</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>AE582820FC1FB39627ABC794</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>D39744B235950795541D03CA</key>
 		<dict>
 			<key>primary</key>
 			<true/>

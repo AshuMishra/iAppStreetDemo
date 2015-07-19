@@ -1,10 +1,25 @@
 PODS:
   - Alamofire (1.2.3)
+  - IJReachability (0.1.0)
+  - SwiftyJSON (2.2.0)
 
 DEPENDENCIES:
   - Alamofire (~> 1.2)
+  - IJReachability (from `https://github.com/Isuru-Nanayakkara/IJReachability.git`)
+  - SwiftyJSON (~> 2.2.0)
+
+EXTERNAL SOURCES:
+  IJReachability:
+    :git: https://github.com/Isuru-Nanayakkara/IJReachability.git
+
+CHECKOUT OPTIONS:
+  IJReachability:
+    :commit: da69c8f4bed9f82203bb49180fb36091b4cd0d28
+    :git: https://github.com/Isuru-Nanayakkara/IJReachability.git
 
 SPEC CHECKSUMS:
   Alamofire: 5550bf0b575ed1a4bf9be572f9463e1015cc169e
+  IJReachability: 3eff33caca50869df09b257bcf712031a56a8575
+  SwiftyJSON: 0b3e6c07af17ff745e77e8e9984097b55c956e5c
 
 COCOAPODS: 0.37.1

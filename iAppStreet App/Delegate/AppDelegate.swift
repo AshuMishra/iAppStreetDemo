@@ -2,7 +2,7 @@
 //  AppDelegate.swift
 //  iAppStreet App
 //
-//  Created by Susmita Horrow on 18/07/15.
+//  Created by Ashutosh Mishra on 18/07/15.
 //  Copyright (c) 2015 Ashutosh Mishra. All rights reserved.
 //
 
@@ -13,7 +13,6 @@ import CoreData
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
 	var window: UIWindow?
-
 
 	func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
 		// Override point for customization after application launch.
