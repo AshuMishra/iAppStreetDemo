@@ -10,7 +10,7 @@ import UIKit
 import IJReachability
 
 class PhotoViewController: UIViewController,UICollectionViewDelegateFlowLayout {
-
+	
 	@IBOutlet weak var flickerSearchBar: UISearchBar!
 	@IBOutlet weak var flickerCollectionView: UICollectionView!
 	
@@ -18,37 +18,37 @@ class PhotoViewController: UIViewController,UICollectionViewDelegateFlowLayout {
 	let imageCache = NSCache()
 	let flickerFooterViewIdentifier = "flickerCollectionFooterFooterView"
 	
-	//MARK: ViewController LifeCycle Methods:-
+	@IBOutlet weak var zoomedImageView: UIImageView!
+	
+    //MARK: ViewController LifeCycle Methods:-
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		self.initialSetup()
-				// Do any additional setup after loading the view, typically from a nib.
 	}
 	
 	override func viewWillAppear(animated: Bool) {
 		super.viewWillAppear(animated)
 	}
-
+	
 	override func didReceiveMemoryWarning() {
 		super.didReceiveMemoryWarning()
-		// Dispose of any resources that can be recreated.
 	}
-
-
-
-//MARK: Custom Action Methods:-
-
-func initialSetup() {
-	let layout = UICollectionViewFlowLayout()
-	layout.footerReferenceSize = CGSize(width: self.flickerCollectionView!.bounds.size.width, height: 100.0)
-	self.flickerCollectionView!.registerClass(CollectionViewLoadingCell.classForCoder(), forSupplementaryViewOfKind: UICollectionElementKindSectionFooter, withReuseIdentifier: flickerFooterViewIdentifier)
 	
-	self.flickerCollectionView!.collectionViewLayout = layout
-	self.flickerCollectionView.hidden = true
-	self.view.backgroundColor = UIColor.blackColor()
+	
+	
+	//MARK: Custom Action Methods:-
+	
+	func initialSetup() {
+		let layout = UICollectionViewFlowLayout()
+		layout.footerReferenceSize = CGSize(width: self.flickerCollectionView!.bounds.size.width, height: 100.0)
+		self.flickerCollectionView!.registerClass(CollectionViewLoadingCell.classForCoder(), forSupplementaryViewOfKind: UICollectionElementKindSectionFooter, withReuseIdentifier: flickerFooterViewIdentifier)
+		
+		self.flickerCollectionView!.collectionViewLayout = layout
+		self.flickerCollectionView.hidden = true
+		self.view.backgroundColor = UIColor.blackColor()
  }
-
+	
 }
 
 //MARK: Data source  methods of UICollectionView
@@ -69,25 +69,25 @@ extension PhotoViewController : UICollectionViewDataSource {
 			let urlString:String = searchArray[indexPath.row]
 			var image: UIImage?
 			if IJReachability.isConnectedToNetwork() {
-				 image = NetworkManager.sharedInstance.getImageFromSystemCacheForURL(urlString)
+				image = NetworkManager.sharedInstance.getImageFromSystemCacheForURL(urlString)
 			}
 			else {
-				 image = NetworkManager.sharedInstance.getImageFromCacheForURL(self.flickerSearchBar.text, urlString: urlString)
+				image = NetworkManager.sharedInstance.getImageFromCacheForURL(self.flickerSearchBar.text, urlString: urlString)
 			}
 			cell.request?.cancel()
-
+			
 			if (image != nil) {
 				cell.flickerImageview.image = image
 			}
 			else {
-			     	cell.flickerImageview.image = nil
-					cell.request = NetworkManager.sharedInstance.downloadImage(self.flickerSearchBar.text, urlString:urlString, completionBlock: { (image, error) -> () in
-						if image != nil {
-							cell.flickerImageview.image = image
-							self.imageCache.setObject(image!, forKey:urlString)
-						}
-						
-					})
+				cell.flickerImageview.image = nil
+				cell.request = NetworkManager.sharedInstance.downloadImage(self.flickerSearchBar.text, urlString:urlString, completionBlock: { (image, error) -> () in
+					if image != nil {
+						cell.flickerImageview.image = image
+						self.imageCache.setObject(image!, forKey:urlString)
+					}
+					
+				})
 				
 			}
 		}
@@ -113,22 +113,46 @@ extension PhotoViewController : UICollectionViewDelegateFlowLayout {
 }
 
 extension PhotoViewController : UICollectionViewDelegate {
-
-  func collectionView(collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, atIndexPath indexPath: NSIndexPath) -> UICollectionReusableView {
 	
-var footer =  self.flickerCollectionView.dequeueReusableSupplementaryViewOfKind(kind, withReuseIdentifier: flickerFooterViewIdentifier, forIndexPath: indexPath) as! UICollectionReusableView
-	if !IJReachability.isConnectedToNetwork() {
-		footer.hidden = true
-
-	}else {
-		footer.hidden = false
-
-	}
-	return footer
+	func collectionView(collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, atIndexPath indexPath: NSIndexPath) -> UICollectionReusableView {
+		
+		var footer =  self.flickerCollectionView.dequeueReusableSupplementaryViewOfKind(kind, withReuseIdentifier: flickerFooterViewIdentifier, forIndexPath: indexPath) as! UICollectionReusableView
+		if !IJReachability.isConnectedToNetwork() {
+			footer.hidden = true
+			
+		}else {
+			footer.hidden = false
+			
+		}
+		return footer
 	}
 	
-	}
+	func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+		let attributes = self.flickerCollectionView.layoutAttributesForItemAtIndexPath(indexPath)
+		var cell = collectionView.cellForItemAtIndexPath(indexPath) as! CustomFlickerCell
+		if (cell.isExpanded == false) {
+			UIView.animateWithDuration(1.0, animations: { () -> Void in
+				var verticalScale = (CGRectGetHeight(UIScreen.mainScreen().bounds)+CGFloat(44.0))/(CGRectGetHeight(cell.frame))
+				var horizontalScale = (CGRectGetWidth(UIScreen.mainScreen().bounds) )/(CGRectGetWidth(cell.frame))
+				
+				cell.transform = CGAffineTransformMakeScale(horizontalScale,verticalScale)
+				cell.center = CGPointMake(CGRectGetWidth(UIScreen.mainScreen().bounds)/2,CGRectGetHeight(UIScreen.mainScreen().bounds)/2+self.flickerCollectionView.contentOffset.y);
+				self.flickerCollectionView.bringSubviewToFront(cell)
 
+				}, completion:{ finished in
+					cell.isExpanded = true
+			})
+		}else {
+			UIView.animateWithDuration(1.0, animations: { () -> Void in
+				cell.transform = CGAffineTransformIdentity
+				cell.center = attributes!.center
+		  
+				}, completion: { finished in
+					cell.isExpanded = false
+				})
+		}
+	}
+}
 class CollectionViewLoadingCell: UICollectionReusableView {
 	let spinner = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.WhiteLarge)
 	
@@ -148,16 +172,16 @@ class CollectionViewLoadingCell: UICollectionReusableView {
 
 extension PhotoViewController : UISearchBarDelegate {
 	func searchBarSearchButtonClicked(searchBar: UISearchBar) {
-		 self.searchArray.removeAll(keepCapacity: true)
-		 NetworkManager.sharedInstance.updatePaginator(searchBar.text)
-		 NetworkManager.sharedInstance.paginator.loadFirst { (result, error, allPagesLoaded) -> () in
+		self.searchArray.removeAll(keepCapacity: true)
+		NetworkManager.sharedInstance.updatePaginator(searchBar.text)
+		NetworkManager.sharedInstance.paginator.loadFirst { (result, error, allPagesLoaded) -> () in
 		 if (error == nil) {
 			self.searchArray = result!
 			self.flickerCollectionView.hidden = false
 			self.flickerCollectionView.reloadData()
 		}
 		else {
-		    self.flickerCollectionView.hidden = false
+			self.flickerCollectionView.hidden = false
 			NetworkManager.sharedInstance.paginator.isCallInProgress = false
 			var tempArray: NSArray? = NetworkManager.sharedInstance.diskCache.allKeys(searchBar.text) as? [String]
 			if tempArray?.count>0 {
@@ -168,19 +192,19 @@ extension PhotoViewController : UISearchBarDelegate {
 				UIAlertView(title: "Error", message: "No record found", delegate: nil, cancelButtonTitle: "OK").show()
 			}
 			self.flickerCollectionView.reloadData()
+			}
 		}
-	  }
 	}
 	func searchBarCancelButtonClicked(searchBar: UISearchBar) {
-		 self.flickerSearchBar.text = ""
-		 self.flickerSearchBar.resignFirstResponder()
+		self.flickerSearchBar.text = ""
+		self.flickerSearchBar.resignFirstResponder()
 	}
 }
 
 //MARK: ScrollView Delegate Methods:-
 extension PhotoViewController: UIScrollViewDelegate {
 	func scrollViewDidScroll(scrollView: UIScrollView) {
-	    self.flickerSearchBar.resignFirstResponder()
+		self.flickerSearchBar.resignFirstResponder()
 		var offset = scrollView.contentOffset;
 		var bounds = scrollView.bounds;
 		var size = scrollView.contentSize;
@@ -190,19 +214,19 @@ extension PhotoViewController: UIScrollViewDelegate {
 		var reload_distance:CGFloat = 10.0;
 		if(y > (size.height + reload_distance)) {
 			if (!NetworkManager.sharedInstance.paginator.isCallInProgress) {
-						 NetworkManager.sharedInstance.paginator.loadNext { (result, error, allPagesLoaded) -> () in
-						 	var prevCount = self.searchArray.count
-							var numberOfNewCell = result!.count - prevCount
-							self.searchArray = result!
-							var indexPaths = [NSIndexPath]()
-							for (var i = prevCount ; i < self.searchArray.count ; i++) {
-								indexPaths.append(NSIndexPath(forItem: i, inSection: 0))
-							}
-							if indexPaths.count>0 {
-								self.flickerCollectionView.insertItemsAtIndexPaths(indexPaths)
-							}
-						}
-
+				NetworkManager.sharedInstance.paginator.loadNext { (result, error, allPagesLoaded) -> () in
+					var prevCount = self.searchArray.count
+					var numberOfNewCell = result!.count - prevCount
+					self.searchArray = result!
+					var indexPaths = [NSIndexPath]()
+					for (var i = prevCount ; i < self.searchArray.count ; i++) {
+						indexPaths.append(NSIndexPath(forItem: i, inSection: 0))
+					}
+					if indexPaths.count>0 {
+						self.flickerCollectionView.insertItemsAtIndexPaths(indexPaths)
+					}
+				}
+				
 			}
 		}
 	}

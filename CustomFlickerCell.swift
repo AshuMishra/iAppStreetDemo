@@ -13,4 +13,5 @@ class CustomFlickerCell: UICollectionViewCell {
 
 	@IBOutlet weak var flickerImageview: UIImageView!
 	var request: Alamofire.Request?
+	var isExpanded:Bool = false
 }

@@ -57,6 +57,7 @@ class Paginator: NSObject {
 			HUDController.sharedController.show()
 			
 			Alamofire.request(.GET, baseURL, parameters: params, encoding: ParameterEncoding.URL).responseJSON { (request, response, data , error) -> Void in
+			if data != nil {
 				let jsonData = JSON(data!)
 				let photos: Array<JSON> = jsonData["photos"].arrayValue
 				for photo in photos {
@@ -67,6 +68,9 @@ class Paginator: NSObject {
 				HUDController.sharedController.hide(animated: true)
 				completionBlock(result: self.finalResult,error: error,allPagesLoaded:false)
 				self.isCallInProgress = false
+			}else {
+				HUDController.sharedController.hide(animated: true)
+			}
 			}
 		}else {
 			
