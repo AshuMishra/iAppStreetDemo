@@ -81,6 +81,7 @@ extension PhotoViewController : UICollectionViewDataSource {
 			}
 			else {
 				cell.flickerImageview.image = nil
+				if IJReachability.isConnectedToNetwork() {
 				cell.request = NetworkManager.sharedInstance.downloadImage(self.flickerSearchBar.text, urlString:urlString, completionBlock: { (image, error) -> () in
 					if image != nil {
 						cell.flickerImageview.image = image
@@ -88,7 +89,7 @@ extension PhotoViewController : UICollectionViewDataSource {
 					}
 					
 				})
-				
+			  }
 			}
 		}
 		
