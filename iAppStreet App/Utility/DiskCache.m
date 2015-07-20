@@ -1,10 +1,10 @@
 //
 //  DiskCache.m
-//  ETAsyncableImageView
+//  iAppStreet App
 //
-//  Created by plb-fueled on 04/06/13.
-//  Copyright (c) 2013 fueled.co. All rights reserved.
-//
+//  Created by Ashutosh Mishra on 19/07/15.
+//  Copyright (c) 2015 Ashutosh Mishra. All rights reserved.
+
 
 #import "DiskCache.h"
 #import <CommonCrypto/CommonCrypto.h>
@@ -206,8 +206,25 @@
 
 - (NSArray *)allKeys:(NSString *)groupname {
   self.groupName = groupname;
-  NSArray *urls = [[NSFileManager defaultManager] subpathsAtPath:[self cacheDirectoryPath]];
-  return urls;
+  
+  NSFileManager *fileManager = [NSFileManager defaultManager];
+  NSString *documentsPath = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) firstObject];
+  NSString *imagesPath = [documentsPath stringByAppendingPathComponent:self.groupName];
+  if (![fileManager fileExistsAtPath:imagesPath]) {
+	return [NSArray array];
+  }else {
+	
+	int count;
+	
+	NSMutableArray *directoryContent = [[[NSFileManager defaultManager] contentsOfDirectoryAtPath:imagesPath error:NULL]mutableCopy];
+	for (count = 0; count < (int)[directoryContent count]; count++)
+	{
+	  NSLog(@" %@",[directoryContent objectAtIndex:count]);
+	}
+	
+	[directoryContent removeObject:@".DS_Store"];
+	return directoryContent;
+  }
 }
 
 

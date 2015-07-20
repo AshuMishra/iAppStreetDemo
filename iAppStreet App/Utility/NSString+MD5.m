@@ -1,10 +1,10 @@
 //
 //  NSString+MD5.h
-//  plb-fueled
+//  iAppStreet App
 //
-//  Created by plb-fueled on 04/06/13.
-//  Copyright (c) 2013 fueled.co. All rights reserved.
-//
+//  Created by Ashutosh Mishra on 19/07/15.
+//  Copyright (c) 2015 Ashutosh Mishra. All rights reserved.
+
 
 #import "NSString+MD5.h"
 
