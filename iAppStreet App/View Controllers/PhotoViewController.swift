@@ -85,7 +85,6 @@ extension PhotoViewController : UICollectionViewDataSource {
 						if image != nil {
 							cell.flickerImageview.image = image
 							self.imageCache.setObject(image!, forKey:urlString)
-							println(cell.flickerImageview.image)
 						}
 						
 					})
@@ -154,7 +153,6 @@ extension PhotoViewController : UISearchBarDelegate {
 		else {
 		    self.flickerCollectionView.hidden = false
 			NetworkManager.sharedInstance.paginator.isCallInProgress = false
-			println("keys==>\(NetworkManager.sharedInstance.diskCache.allKeys(searchBar.text))")
 			var tempArray: NSArray? = NetworkManager.sharedInstance.diskCache.allKeys(searchBar.text) as? [String]
 			if tempArray?.count>0 {
 				self.searchArray = NetworkManager.sharedInstance.diskCache.allKeys(searchBar.text) as! [String]
@@ -191,13 +189,8 @@ extension PhotoViewController: UIScrollViewDelegate {
 								indexPaths.append(NSIndexPath(forItem: i, inSection: 0))
 							}
 							if indexPaths.count>0 {
-  
 								self.flickerCollectionView.insertItemsAtIndexPaths(indexPaths)
 							}
-							else {
-								UIAlertView(title: "Error", message: "Please check internet connection and try again", delegate: nil, cancelButtonTitle: "OK").show()
-							}
-							
 						}
 
 			}

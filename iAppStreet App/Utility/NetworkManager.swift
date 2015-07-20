@@ -74,10 +74,15 @@ class NetworkManager {
 			let request:Request? = Alamofire.request(.GET, imageURL!)
 			request?.responseImageData({ (request, _, data, error) -> Void in
 				if error == nil && data != nil {
-					self.storeImageToDisk(category, imageData: data!, urlString: urlString)
-					let image = UIImage(data: data!, scale: UIScreen.mainScreen().scale)
-					self.imageCache.setObject(image!, forKey:urlString)
-					completionBlock(image: image, error: nil)
+					dispatch_async(dispatch_get_global_queue(Int(QOS_CLASS_BACKGROUND.value), 0)) { // 1
+						self.storeImageToDisk(category, imageData: data!, urlString: urlString)
+						let image = UIImage(data: data!, scale: UIScreen.mainScreen().scale)
+						self.imageCache.setObject(image!, forKey:urlString)
+						dispatch_async(dispatch_get_main_queue()) { // 2
+							completionBlock(image: image, error: nil)
+						}
+					}
+
 				}else {
 					completionBlock(image: nil, error: error)
 				}
@@ -112,21 +117,6 @@ class NetworkManager {
 	
 	func getImageFromSystemCacheForURL(urlString:String)-> UIImage? {
 		var image:UIImage? = self.imageCache.objectForKey(urlString) as? UIImage
-//		if (imageData == nil) {
-//			imageData = DiskCache.sharedCache().getCacheForKey(urlString)
-//			if let data = imageData {
-//				println("image from disk")
-//				imageCache.setObject(data, forKey: urlString)
-//			}
-//		}else {
-//			println("image from memory")
-//		}
-//		
-//		if let data = imageData {
-//			return UIImage(data: imageData!)
-//		}else {
-//			return nil
-//		}
 		return image
 	}
 }
