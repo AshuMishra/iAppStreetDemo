@@ -115,13 +115,19 @@ extension PhotoViewController : UICollectionViewDelegateFlowLayout {
 extension PhotoViewController : UICollectionViewDelegate {
 
   func collectionView(collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, atIndexPath indexPath: NSIndexPath) -> UICollectionReusableView {
-//	if self.searchArray.count==0 {
-//		self.flickerCollectionView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
-//	}
-	return self.flickerCollectionView.dequeueReusableSupplementaryViewOfKind(kind, withReuseIdentifier: flickerFooterViewIdentifier, forIndexPath: indexPath) as! UICollectionReusableView
-	}
+	
+var footer =  self.flickerCollectionView.dequeueReusableSupplementaryViewOfKind(kind, withReuseIdentifier: flickerFooterViewIdentifier, forIndexPath: indexPath) as! UICollectionReusableView
+	if !IJReachability.isConnectedToNetwork() {
+		footer.hidden = true
 
-}
+	}else {
+		footer.hidden = false
+
+	}
+	return footer
+	}
+	
+	}
 
 class CollectionViewLoadingCell: UICollectionReusableView {
 	let spinner = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.WhiteLarge)
@@ -164,6 +170,10 @@ extension PhotoViewController : UISearchBarDelegate {
 			self.flickerCollectionView.reloadData()
 		}
 	  }
+	}
+	func searchBarCancelButtonClicked(searchBar: UISearchBar) {
+		 self.flickerSearchBar.text = ""
+		 self.flickerSearchBar.resignFirstResponder()
 	}
 }
 
