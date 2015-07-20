@@ -154,7 +154,7 @@ extension PhotoViewController : UISearchBarDelegate {
 		else {
 		    self.flickerCollectionView.hidden = false
 			NetworkManager.sharedInstance.paginator.isCallInProgress = false
-			println("keys==>\(NetworkManager.sharedInstance.diskCache.allKeys(searchBar.text))")
+//			println("keys==>\(NetworkManager.sharedInstance.diskCache.allKeys(searchBar.text))")
 			var tempArray: NSArray? = NetworkManager.sharedInstance.diskCache.allKeys(searchBar.text) as? [String]
 			if tempArray?.count>0 {
 				self.searchArray = NetworkManager.sharedInstance.diskCache.allKeys(searchBar.text) as! [String]
