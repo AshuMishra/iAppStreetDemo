@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import IJReachability
 
 class PhotoViewController: UIViewController,UICollectionViewDelegateFlowLayout {
 
@@ -14,6 +15,7 @@ class PhotoViewController: UIViewController,UICollectionViewDelegateFlowLayout {
 	@IBOutlet weak var flickerCollectionView: UICollectionView!
 	
 	private var searchArray = [String]()
+	let imageCache = NSCache()
 	let flickerFooterViewIdentifier = "flickerCollectionFooterFooterView"
 	
 	//MARK: ViewController LifeCycle Methods:-
@@ -65,18 +67,30 @@ extension PhotoViewController : UICollectionViewDataSource {
 		
 		if (searchArray.count > 0) {
 			let urlString:String = searchArray[indexPath.row]
-			var image = NetworkManager.sharedInstance.getImageFromCacheForURL(urlString)
+			var image: UIImage?
+			if IJReachability.isConnectedToNetwork() {
+				 image = NetworkManager.sharedInstance.getImageFromSystemCacheForURL(urlString)
+			}
+			else {
+				 image = NetworkManager.sharedInstance.getImageFromCacheForURL(self.flickerSearchBar.text, urlString: urlString)
+			}
+			cell.request?.cancel()
+
 			if (image != nil) {
 				cell.flickerImageview.image = image
 			}
 			else {
-				cell.flickerImageview.image = nil
-				cell.request?.cancel()
-				cell.request = NetworkManager.sharedInstance.downloadImage(self.flickerSearchBar.text, urlString:urlString, completionBlock: { (image, error) -> () in
-					cell.flickerImageview.image = image
-					println(cell.flickerImageview.image)
+			     	cell.flickerImageview.image = nil
+					cell.request = NetworkManager.sharedInstance.downloadImage(self.flickerSearchBar.text, urlString:urlString, completionBlock: { (image, error) -> () in
+						if image != nil {
+							cell.flickerImageview.image = image
+							self.imageCache.setObject(image!, forKey:urlString)
+							println(cell.flickerImageview.image)
 
-				})
+						}
+						
+					})
+				
 			}
 		}
 		
@@ -137,9 +151,19 @@ extension PhotoViewController : UISearchBarDelegate {
 			self.searchArray = result!
 			self.flickerCollectionView.hidden = false
 			self.flickerCollectionView.reloadData()
-		}else {
-			println("keys +\(NetworkManager.sharedInstance.diskCache.allKeys())")
-			self.searchArray = NetworkManager.sharedInstance.diskCache.allKeys() as! [String]
+		}
+		else {
+		    self.flickerCollectionView.hidden = false
+			NetworkManager.sharedInstance.paginator.isCallInProgress = false
+			println("keys==>\(NetworkManager.sharedInstance.diskCache.allKeys(searchBar.text))")
+			var tempArray: NSArray? = NetworkManager.sharedInstance.diskCache.allKeys(searchBar.text) as? [String]
+			if tempArray?.count>0 {
+				self.searchArray = NetworkManager.sharedInstance.diskCache.allKeys(searchBar.text) as! [String]
+			}
+			else {
+				self.searchArray.removeAll(keepCapacity: false)
+				UIAlertView(title: "Error", message: "No record found", delegate: nil, cancelButtonTitle: "OK").show()
+			}
 			self.flickerCollectionView.reloadData()
 		}
 	  }
@@ -167,7 +191,13 @@ extension PhotoViewController: UIScrollViewDelegate {
 							for (var i = prevCount ; i < self.searchArray.count ; i++) {
 								indexPaths.append(NSIndexPath(forItem: i, inSection: 0))
 							}
-							self.flickerCollectionView.insertItemsAtIndexPaths(indexPaths)
+							if indexPaths.count>0 {
+								self.flickerCollectionView.insertItemsAtIndexPaths(indexPaths)
+							}
+							else {
+								UIAlertView(title: "Error", message: "Please check internet connection and try again", delegate: nil, cancelButtonTitle: "OK").show()
+							}
+							
 						}
 
 			}

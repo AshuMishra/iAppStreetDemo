@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "4EFD5FAC1B5A74B900D91F91"
-               BuildableName = "iAppStreet App.app"
-               BlueprintName = "iAppStreet App"
-               ReferencedContainer = "container:iAppStreet App.xcodeproj">
+               BuildableName = "iAppStreetApp.app"
+               BlueprintName = "iAppStreetApp"
+               ReferencedContainer = "container:iAppStreetApp.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
          <BuildActionEntry
@@ -29,9 +29,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "4EFD5FC41B5A74B900D91F91"
-               BuildableName = "iAppStreet AppTests.xctest"
-               BlueprintName = "iAppStreet AppTests"
-               ReferencedContainer = "container:iAppStreet App.xcodeproj">
+               BuildableName = "iAppStreetAppTests.xctest"
+               BlueprintName = "iAppStreetAppTests"
+               ReferencedContainer = "container:iAppStreetApp.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -47,9 +47,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "4EFD5FC41B5A74B900D91F91"
-               BuildableName = "iAppStreet AppTests.xctest"
-               BlueprintName = "iAppStreet AppTests"
-               ReferencedContainer = "container:iAppStreet App.xcodeproj">
+               BuildableName = "iAppStreetAppTests.xctest"
+               BlueprintName = "iAppStreetAppTests"
+               ReferencedContainer = "container:iAppStreetApp.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -57,9 +57,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "4EFD5FAC1B5A74B900D91F91"
-            BuildableName = "iAppStreet App.app"
-            BlueprintName = "iAppStreet App"
-            ReferencedContainer = "container:iAppStreet App.xcodeproj">
+            BuildableName = "iAppStreetApp.app"
+            BlueprintName = "iAppStreetApp"
+            ReferencedContainer = "container:iAppStreetApp.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </TestAction>
@@ -77,9 +77,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "4EFD5FAC1B5A74B900D91F91"
-            BuildableName = "iAppStreet App.app"
-            BlueprintName = "iAppStreet App"
-            ReferencedContainer = "container:iAppStreet App.xcodeproj">
+            BuildableName = "iAppStreetApp.app"
+            BlueprintName = "iAppStreetApp"
+            ReferencedContainer = "container:iAppStreetApp.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -101,9 +101,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "4EFD5FAC1B5A74B900D91F91"
-            BuildableName = "iAppStreet App.app"
-            BlueprintName = "iAppStreet App"
-            ReferencedContainer = "container:iAppStreet App.xcodeproj">
+            BuildableName = "iAppStreetApp.app"
+            BlueprintName = "iAppStreetApp"
+            ReferencedContainer = "container:iAppStreetApp.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

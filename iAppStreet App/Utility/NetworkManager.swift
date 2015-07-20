@@ -56,7 +56,7 @@ let consumer_key = "h7mEmd23b1Lq38rkE9Kc2fhf2AiFBYDDZOR6orBe"
 class NetworkManager {
 
 	let imageCache = NSCache()
-	let diskCache = DiskCache.sharedCache()
+	let diskCache: DiskCache = DiskCache.sharedCache()
 	let paginator:Paginator
 	
 	init () {
@@ -94,6 +94,7 @@ class NetworkManager {
 				if error == nil && data != nil {
 					self.storeImage(category, imageData: data!, urlString: urlString)
 					let image = UIImage(data: data!, scale: UIScreen.mainScreen().scale)
+					self.imageCache.setObject(image!, forKey:urlString)
 					completionBlock(image: image, error: nil)
 				}else {
 					completionBlock(image: nil, error: error)
@@ -105,7 +106,8 @@ class NetworkManager {
 	
 	func storeImage(category:String,imageData:NSData, urlString:String) {
 		var key = category + "_" + urlString
-		imageCache.setObject(imageData, forKey: key)
+//	  	var fileManager = offlineManager.sharedManager()
+		DiskCache.sharedCache().groupName = category
 		DiskCache.sharedCache().setCache(imageData, forKey: urlString, withGroup: category)
 //		DiskCache.sharedCache().setCache(imageData, forKey: key)
 	}
@@ -113,8 +115,7 @@ class NetworkManager {
 	func getImageFromCacheForURL(category:String,urlString:String)-> UIImage? {
 		var imageData:NSData? = self.imageCache.objectForKey(urlString) as? NSData
 		if (imageData == nil) {
-		imageData = DiskCache.sharedCache().getCacheForKey(urlString, withGroup: category)
-//			imageData = DiskCache.sharedCache().getCacheForKey(urlString)
+		    imageData = DiskCache.sharedCache().getCacheForKey(urlString, withGroup: category)
 			if let data = imageData {
 				println("image from disk")
 				imageCache.setObject(data, forKey: urlString)
@@ -130,8 +131,8 @@ class NetworkManager {
 		}
 	}
 	
-	func getImageFromCacheForURL(urlString:String)-> UIImage? {
-//		var imageData:NSData? = self.imageCache.objectForKey(urlString) as? NSData
+	func getImageFromSystemCacheForURL(urlString:String)-> UIImage? {
+		var image:UIImage? = self.imageCache.objectForKey(urlString) as? UIImage
 //		if (imageData == nil) {
 //			imageData = DiskCache.sharedCache().getCacheForKey(urlString)
 //			if let data = imageData {
@@ -147,7 +148,7 @@ class NetworkManager {
 //		}else {
 //			return nil
 //		}
-		return DiskCache.sharedCache().imageForKey(urlString)
+		return image
 	}
 }
 

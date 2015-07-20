@@ -13,12 +13,4 @@ class CustomFlickerCell: UICollectionViewCell {
 
 	@IBOutlet weak var flickerImageview: UIImageView!
 	var request: Alamofire.Request?
-	
-//	func configureCell(URLString:String) {
-//	
-//	
-//	}
-
-
-
 }

@@ -154,17 +154,9 @@
     }
 }
 
-- (NSURL *)asyncableCachesDirectoryForCategory:(NSString *)group {
-  NSArray *urls = [[NSFileManager defaultManager] URLsForDirectory:NSCachesDirectory
-														 inDomains:NSUserDomainMask];
-  if ([urls count] > 0) {
-	return [[urls objectAtIndex:0] URLByAppendingPathComponent:[NSString stringWithFormat:@"Asyncable/%@",group]];
-  }
-  else {
-	return nil;
-  }
-
-}
+//- (NSURL *)asyncableCachesDirectoryForCategory:(NSString *) {
+//
+//}
 
 -(void)clearStaleCaches {
     NSFileManager *fileManager = [NSFileManager defaultManager];
@@ -225,7 +217,7 @@
 
 - (NSString *)cacheDirectoryPath {
    NSArray *cachePaths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
-   NSString *cacheDirectory = [[cachePaths objectAtIndex:0] stringByAppendingString:@"/Asyncable/cats"];
+   NSString *cacheDirectory = [[cachePaths objectAtIndex:0] stringByAppendingString:@"/Asyncable"];
    return cacheDirectory;
 }
 
@@ -276,9 +268,8 @@
 - (NSArray *)allKeys {
 //  NSArray *cacheFileList = [manager subpathsAtPath:[self cacheDirectoryPath]];
   NSError *error = nil;
-	
   NSArray *caches = [[NSFileManager defaultManager]
-					 contentsOfDirectoryAtURL:[self asyncableCachesDirectoryForCategory:@"cats"]
+					 contentsOfDirectoryAtURL:[self asyncableCachesDirectory]
 					 includingPropertiesForKeys:[NSArray arrayWithObject:NSURLContentModificationDateKey]
 					 options:0
 					 error:&error];
