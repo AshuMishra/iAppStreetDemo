@@ -6,8 +6,13 @@
 //  Copyright (c) 2015 Ashutosh Mishra. All rights reserved.
 //
 
-import Cocoa
+import Foundation
 
 class offlineManager: NSObject {
+	
+	class sharedManager {
+		static let sharedInstance = offlineManager()
+	}
+	
 
 }

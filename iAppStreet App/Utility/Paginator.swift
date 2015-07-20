@@ -2,7 +2,7 @@
 //  Paginator.swift
 //  iAppStreet App
 //
-//  Created by Susmita Horrow on 19/07/15.
+//  Created by Ashutosh Mishra on 19/07/15.
 //  Copyright (c) 2015 Ashutosh Mishra. All rights reserved.
 //
 

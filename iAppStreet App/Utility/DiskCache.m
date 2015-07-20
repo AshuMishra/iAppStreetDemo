@@ -25,7 +25,9 @@
 
 @end
 
+
 @implementation DiskCache
+@synthesize groupName;
 
 +(DiskCache*) sharedCache{
     static dispatch_once_t predicate;
@@ -34,17 +36,14 @@
     dispatch_once(&predicate, ^{
         sharedCache = [[DiskCache alloc] init];
     });
-    
+  
 	return sharedCache;
 }
 
 -(id)init {
     self = [super init];
     if (self) {
-        [self createCacheDirectory];
-        [self clearStaleCaches];
-        [self checkAndDumpDiskMemory];
-        [[NSNotificationCenter defaultCenter]
+	          [[NSNotificationCenter defaultCenter]
                             addObserver:self
                                selector:@selector(didReceiveMemoryWarningNotification:)
                                    name:UIApplicationDidReceiveMemoryWarningNotification
@@ -68,7 +67,7 @@
 }
 
 
--(void)createCacheDirectory{
+-(void)createCacheDirectory {
     NSError *error;
     if(![[NSFileManager defaultManager]createDirectoryAtURL:[self asyncableCachesDirectory]
                                 withIntermediateDirectories:YES
@@ -78,28 +77,32 @@
     }
 }
 
--(void)setCache:(NSData*)data forKey:(NSString *)key {
-    NSString *cachesFolder = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) lastObject];
-	NSString *file = [NSString stringWithFormat:@"%@/%@.png",[cachesFolder stringByAppendingPathComponent:@"Asyncable"],[key MD5]];
-    NSURL *cacheFileURL = [[self asyncableCachesDirectory] URLByAppendingPathComponent:key];
-    NSError *error = nil;
-//    [data writeToURL:cacheFileURL options:0 error:&error];
-  if (![[NSFileManager defaultManager] fileExistsAtPath:file])
-  {
-	
-	[[NSFileManager defaultManager]createFileAtPath:file contents:data attributes:nil];
-  }
-	[data writeToFile:file options:NSDataWritingAtomic error:&error];
-    [self checkAndDumpDiskMemory];
-}
+//-(void)setCache:(NSData*)data forKey:(NSString *)key {
+//    NSString *cachesFolder = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) lastObject];
+//	NSString *file = [NSString stringWithFormat:@"%@/%@.png",[cachesFolder stringByAppendingPathComponent:@"Asyncable"],[key MD5]];
+//    NSURL *cacheFileURL = [[self asyncableCachesDirectory] URLByAppendingPathComponent:key];
+//    NSError *error = nil;
+////    [data writeToURL:cacheFileURL options:0 error:&error];
+//  if (![[NSFileManager defaultManager] fileExistsAtPath:file])
+//  {
+//	
+//	[[NSFileManager defaultManager]createFileAtPath:file contents:data attributes:nil];
+//  }
+//	[data writeToFile:file options:NSDataWritingAtomic error:&error];
+//    [self checkAndDumpDiskMemory];
+//}
 
 
 - (void)setCache:(NSData *)data forKey:(NSString *)key withGroup:(NSString *)group {
+
+  if (groupName !=  nil){
+	[self setupDirectory];
+  }
+  key = [key stringByReplacingOccurrencesOfString: @"/" withString:@"-"];
   NSString *cachesFolder = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) lastObject];
-  NSString *file = [NSString stringWithFormat:@"%@/%@/%@.png",[cachesFolder stringByAppendingPathComponent:@"Asyncable"],group,[key MD5]];
+  NSString *file = [NSString stringWithFormat:@"%@/%@.png",[cachesFolder stringByAppendingPathComponent:group],[key MD5]];
   NSError *error = nil;
   if (![[NSFileManager defaultManager] fileExistsAtPath:file]) {
-	
 	[[NSFileManager defaultManager]createFileAtPath:file contents:data attributes:nil];
   }
   [data writeToFile:file options:NSDataWritingAtomic error:&error];
@@ -107,47 +110,53 @@
 
 
 }
--(NSData *)getCacheForKey:(NSString *)key {
-//  NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-//  NSString *docPath = [paths objectAtIndex:0];
-//  NSString *filename = [NSString stringWithFormat:@"%.png", [self getdataAndTime]];
-//  NSString *filePath = [docPath stringByAppendingPathComponent:filename];
-  
-  
-  NSString *cachesFolder = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) lastObject];
-  NSString *file = [NSString stringWithFormat:@"%@/%@",[cachesFolder stringByAppendingPathComponent:@"Asyncable"],key];
-  NSURL *cacheFileURL = [[self asyncableCachesDirectory] URLByAppendingPathComponent:key];
-    NSFileManager *fileManager = [NSFileManager defaultManager];
-//    NSURL *cacheFileURL = [[self asyncableCachesDirectory] URLByAppendingPathComponent:key];
-//    NSData *data = [fileManager contentsAtPath:[cacheFileURL path]];
-  NSData *data = [[NSFileManager defaultManager]contentsAtPath:file];
-    return data;
+
+-(void) setupDirectory {
+  [self createCacheDirectory];
+  [self clearStaleCaches];
+  [self checkAndDumpDiskMemory];
 }
+//-(NSData *)getCacheForKey:(NSString *)key {
+////  NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+////  NSString *docPath = [paths objectAtIndex:0];
+////  NSString *filename = [NSString stringWithFormat:@"%.png", [self getdataAndTime]];
+////  NSString *filePath = [docPath stringByAppendingPathComponent:filename];
+//  
+//  
+//  NSString *cachesFolder = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) lastObject];
+//  NSString *file = [NSString stringWithFormat:@"%@/%@",[cachesFolder stringByAppendingPathComponent:@"Asyncable"],key];
+//  NSURL *cacheFileURL = [[self asyncableCachesDirectory] URLByAppendingPathComponent:key];
+//    NSFileManager *fileManager = [NSFileManager defaultManager];
+////    NSURL *cacheFileURL = [[self asyncableCachesDirectory] URLByAppendingPathComponent:key];
+////    NSData *data = [fileManager contentsAtPath:[cacheFileURL path]];
+//  NSData *data = [[NSFileManager defaultManager]contentsAtPath:file];
+//    return data;
+//}
 
 - (NSData *)getCacheForKey:(NSString *)key withGroup:(NSString *)group {
   NSString *cachesFolder = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) lastObject];
-  NSString *file = [NSString stringWithFormat:@"%@/%@/%@",[cachesFolder stringByAppendingPathComponent:@"Asyncable"],group,key];
+  NSString *file = [NSString stringWithFormat:@"%@/%@",[cachesFolder stringByAppendingPathComponent:group],key];
   NSData *data = [[NSFileManager defaultManager]contentsAtPath:file];
   return data;
 }
 
-- (UIImage *)imageForKey:(NSString *)key {
-  
-  NSString *cachesFolder = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) lastObject];
-  NSString *file = [NSString stringWithFormat:@"%@/%@",[cachesFolder stringByAppendingPathComponent:@"Asyncable"],key];
-  NSURL *cacheFileURL = [[self asyncableCachesDirectory] URLByAppendingPathComponent:key];
-  return [UIImage imageNamed:file];
-
-}
-- (void)getImageForKey:(NSString *)key forView:(UIImageView *)imageView {
-    imageView.image = [UIImage imageWithData:[self getCacheForKey:key]];
-}
+//- (UIImage *)imageForKey:(NSString *)key {
+//  
+//  NSString *cachesFolder = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) lastObject];
+//  NSString *file = [NSString stringWithFormat:@"%@/%@",[cachesFolder stringByAppendingPathComponent:@"Asyncable"],key];
+//  NSURL *cacheFileURL = [[self asyncableCachesDirectory] URLByAppendingPathComponent:key];
+//  return [UIImage imageNamed:file];
+//
+//}
+//- (void)getImageForKey:(NSString *)key forView:(UIImageView *)imageView {
+//    imageView.image = [UIImage imageWithData:[self getCacheForKey:key]];
+//}
 
 -(NSURL *)asyncableCachesDirectory {
     NSArray *urls = [[NSFileManager defaultManager] URLsForDirectory:NSCachesDirectory
                                                            inDomains:NSUserDomainMask];
     if ([urls count] > 0) {
-        return [[urls objectAtIndex:0] URLByAppendingPathComponent:@"Asyncable"];
+        return [[urls objectAtIndex:0] URLByAppendingPathComponent:self.groupName];
     }
     else {
         return nil;
@@ -217,7 +226,7 @@
 
 - (NSString *)cacheDirectoryPath {
    NSArray *cachePaths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
-   NSString *cacheDirectory = [[cachePaths objectAtIndex:0] stringByAppendingString:@"/Asyncable"];
+   NSString *cacheDirectory = [[cachePaths objectAtIndex:0] stringByAppendingString:[NSString stringWithFormat:@"/%@",self.groupName]];
    return cacheDirectory;
 }
 
@@ -265,18 +274,29 @@
     }
 }
 
-- (NSArray *)allKeys {
-//  NSArray *cacheFileList = [manager subpathsAtPath:[self cacheDirectoryPath]];
-  NSError *error = nil;
-  NSArray *caches = [[NSFileManager defaultManager]
-					 contentsOfDirectoryAtURL:[self asyncableCachesDirectory]
-					 includingPropertiesForKeys:[NSArray arrayWithObject:NSURLContentModificationDateKey]
-					 options:0
-					 error:&error];
+//- (NSArray *)allKeys {
+////  NSArray *cacheFileList = [manager subpathsAtPath:[self cacheDirectoryPath]];
+//  NSError *error = nil;
+//  NSArray *caches = [[NSFileManager defaultManager]
+//					 contentsOfDirectoryAtURL:[self asyncableCachesDirectory]
+//					 includingPropertiesForKeys:[NSArray arrayWithObject:NSURLContentModificationDateKey]
+//					 options:0
+//					 error:&error];
+//  NSArray *urls = [[NSFileManager defaultManager] subpathsAtPath:[self cacheDirectoryPath]];
+//  return urls;
+//}
+
+- (NSArray *)allKeys:(NSString *)groupname {
+//  NSError *error = nil;
+  self.groupName = groupname;
+//  NSArray *caches = [[NSFileManager defaultManager]
+//					 contentsOfDirectoryAtURL:[self asyncableCachesDirectory]
+//					 includingPropertiesForKeys:[NSArray arrayWithObject:NSURLContentModificationDateKey]
+//					 options:0
+//					 error:&error];
   NSArray *urls = [[NSFileManager defaultManager] subpathsAtPath:[self cacheDirectoryPath]];
   return urls;
 }
-
 
 
 @end

@@ -30,20 +30,9 @@
 		4EFD5FBB1B5A74B900D91F91 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4EFD5FB91B5A74B900D91F91 /* Main.storyboard */; };
 		4EFD5FBD1B5A74B900D91F91 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4EFD5FBC1B5A74B900D91F91 /* Images.xcassets */; };
 		4EFD5FC01B5A74B900D91F91 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4EFD5FBE1B5A74B900D91F91 /* LaunchScreen.xib */; };
-		4EFD5FCC1B5A74B900D91F91 /* iAppStreet_AppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EFD5FCB1B5A74B900D91F91 /* iAppStreet_AppTests.swift */; };
 		4EFD5FDC1B5A827700D91F91 /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 4EFD5FDB1B5A827700D91F91 /* Podfile */; };
 		4EFD5FE11B5A902B00D91F91 /* CustomFlickerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EFD5FE01B5A902B00D91F91 /* CustomFlickerCell.swift */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		4EFD5FC61B5A74B900D91F91 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 4EFD5FA51B5A74B900D91F91 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 4EFD5FAC1B5A74B900D91F91;
-			remoteInfo = "iAppStreet App";
-		};
-/* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
 		4E58C9171B5C12DE0082AED2 /* Embed Frameworks */ = {
@@ -88,7 +77,6 @@
 		4EFD5FBA1B5A74B900D91F91 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		4EFD5FBC1B5A74B900D91F91 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		4EFD5FBF1B5A74B900D91F91 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
-		4EFD5FC51B5A74B900D91F91 /* iAppStreetAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = iAppStreetAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4EFD5FCA1B5A74B900D91F91 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4EFD5FCB1B5A74B900D91F91 /* iAppStreet_AppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iAppStreet_AppTests.swift; sourceTree = "<group>"; };
 		4EFD5FDB1B5A827700D91F91 /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
@@ -106,13 +94,6 @@
 				4E58C9091B5C11A80082AED2 /* IJReachability.framework in Frameworks */,
 				4E58C9051B5C11820082AED2 /* SwiftyJSON.framework in Frameworks */,
 				1DE98A001D898B31FF222C2D /* Pods.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		4EFD5FC21B5A74B900D91F91 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -177,7 +158,6 @@
 			isa = PBXGroup;
 			children = (
 				4EFD5FAD1B5A74B900D91F91 /* iAppStreetApp.app */,
-				4EFD5FC51B5A74B900D91F91 /* iAppStreetAppTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -298,24 +278,6 @@
 			productReference = 4EFD5FAD1B5A74B900D91F91 /* iAppStreetApp.app */;
 			productType = "com.apple.product-type.application";
 		};
-		4EFD5FC41B5A74B900D91F91 /* iAppStreetAppTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 4EFD5FD21B5A74B900D91F91 /* Build configuration list for PBXNativeTarget "iAppStreetAppTests" */;
-			buildPhases = (
-				4EFD5FC11B5A74B900D91F91 /* Sources */,
-				4EFD5FC21B5A74B900D91F91 /* Frameworks */,
-				4EFD5FC31B5A74B900D91F91 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				4EFD5FC71B5A74B900D91F91 /* PBXTargetDependency */,
-			);
-			name = iAppStreetAppTests;
-			productName = "iAppStreet AppTests";
-			productReference = 4EFD5FC51B5A74B900D91F91 /* iAppStreetAppTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -328,10 +290,6 @@
 				TargetAttributes = {
 					4EFD5FAC1B5A74B900D91F91 = {
 						CreatedOnToolsVersion = 6.3.1;
-					};
-					4EFD5FC41B5A74B900D91F91 = {
-						CreatedOnToolsVersion = 6.3.1;
-						TestTargetID = 4EFD5FAC1B5A74B900D91F91;
 					};
 				};
 			};
@@ -349,7 +307,6 @@
 			projectRoot = "";
 			targets = (
 				4EFD5FAC1B5A74B900D91F91 /* iAppStreetApp */,
-				4EFD5FC41B5A74B900D91F91 /* iAppStreetAppTests */,
 			);
 		};
 /* End PBXProject section */
@@ -365,13 +322,6 @@
 				4E58C92B1B5C16300082AED2 /* Images.xcassets in Resources */,
 				4EFD5FBD1B5A74B900D91F91 /* Images.xcassets in Resources */,
 				4E58C92C1B5C16300082AED2 /* Info.plist in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		4EFD5FC31B5A74B900D91F91 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -448,23 +398,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		4EFD5FC11B5A74B900D91F91 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				4EFD5FCC1B5A74B900D91F91 /* iAppStreet_AppTests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		4EFD5FC71B5A74B900D91F91 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 4EFD5FAC1B5A74B900D91F91 /* iAppStreetApp */;
-			targetProxy = 4EFD5FC61B5A74B900D91F91 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		4EFD5FB91B5A74B900D91F91 /* Main.storyboard */ = {
@@ -579,9 +513,10 @@
 					"$(PROJECT_DIR)/build/Debug-iphoneos/Pods",
 				);
 				INFOPLIST_FILE = "iAppStreet App/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = iAppStreetApp;
-				SWIFT_OBJC_BRIDGING_HEADER = "/Users/susmitahorrow/Desktop/iAppStreet App/iAppStreet App/iAppStreetApp-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/iAppStreet App/iAppStreetApp-Bridging-Header.h";
 			};
 			name = Debug;
 		};
@@ -595,43 +530,10 @@
 					"$(PROJECT_DIR)/build/Debug-iphoneos/Pods",
 				);
 				INFOPLIST_FILE = "iAppStreet App/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = iAppStreetApp;
-				SWIFT_OBJC_BRIDGING_HEADER = "/Users/susmitahorrow/Desktop/iAppStreet App/iAppStreet App/iAppStreetApp-Bridging-Header.h";
-			};
-			name = Release;
-		};
-		4EFD5FD31B5A74B900D91F91 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = "iAppStreet AppTests/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = iAppStreetAppTests;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/iAppStreet App.app/iAppStreet App";
-			};
-			name = Debug;
-		};
-		4EFD5FD41B5A74B900D91F91 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = "iAppStreet AppTests/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = iAppStreetAppTests;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/iAppStreet App.app/iAppStreet App";
+				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/iAppStreet App/iAppStreetApp-Bridging-Header.h";
 			};
 			name = Release;
 		};
@@ -652,15 +554,6 @@
 			buildConfigurations = (
 				4EFD5FD01B5A74B900D91F91 /* Debug */,
 				4EFD5FD11B5A74B900D91F91 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		4EFD5FD21B5A74B900D91F91 /* Build configuration list for PBXNativeTarget "iAppStreetAppTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				4EFD5FD31B5A74B900D91F91 /* Debug */,
-				4EFD5FD41B5A74B900D91F91 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

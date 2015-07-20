@@ -19,9 +19,10 @@ typedef enum {
 
 @interface DiskCache : NSObject
 
+@property(nonatomic,strong) NSString* groupName;
 +(DiskCache *) sharedCache;
 
-- (void)setCache:(NSData *)data forKey:(NSString *)key;
+//- (void)setCache:(NSData *)data forKey:(NSString *)key;
 - (void)setCache:(NSData *)data forKey:(NSString *)key withGroup:(NSString *)group;
 - (NSData *)getCacheForKey:(NSString *)key;
 - (NSData *)getCacheForKey:(NSString *)key withGroup:(NSString *)group;
@@ -30,6 +31,7 @@ typedef enum {
 - (void)setFileDeletionType:(FileDeletionType) deletionType;
 - (unsigned long long int) diskCacheFolderSize;
 - (NSArray *)allKeys;
+- (NSArray *)allKeys:(NSString *)groupname;
 
 - (UIImage *)imageForKey:(NSString *)key;
 
