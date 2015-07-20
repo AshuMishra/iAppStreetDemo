@@ -12,18 +12,6 @@ import Alamofire
 import SwiftyJSON
 
 extension Alamofire.Request {
-	class func imageResponseSerializer() -> Serializer {
-		return { request, response, data in
-			if data == nil {
-				return (nil, nil)
-			}
-			
-			let image = UIImage(data: data!, scale: UIScreen.mainScreen().scale)
-			
-			return (image, nil)
-		}
-	}
-	
 	class func imageDataResponseSerializer() -> Serializer {
 		return { request, response, data in
 			if data == nil {
@@ -34,13 +22,7 @@ extension Alamofire.Request {
 		}
 
 	}
- 
-	func responseImage(completionHandler: (NSURLRequest, NSHTTPURLResponse?, UIImage?, NSError?) -> Void) -> Self {
-		return response(serializer: Request.imageResponseSerializer(), completionHandler: { (request, response, image, error) in
-			completionHandler(request, response, image as? UIImage, error)
-		})
-	}
-	
+
 	func responseImageData(completionHandler: (NSURLRequest, NSHTTPURLResponse?, NSData?, NSError?) -> Void) -> Self {
 		return response(serializer: Request.imageDataResponseSerializer(), completionHandler: { (request, response, data, error) in
 			completionHandler(request, response, data as? NSData, error)
@@ -92,7 +74,7 @@ class NetworkManager {
 			let request:Request? = Alamofire.request(.GET, imageURL!)
 			request?.responseImageData({ (request, _, data, error) -> Void in
 				if error == nil && data != nil {
-					self.storeImage(category, imageData: data!, urlString: urlString)
+					self.storeImageToDisk(category, imageData: data!, urlString: urlString)
 					let image = UIImage(data: data!, scale: UIScreen.mainScreen().scale)
 					self.imageCache.setObject(image!, forKey:urlString)
 					completionBlock(image: image, error: nil)
@@ -104,14 +86,11 @@ class NetworkManager {
 		}
 	}
 	
-	func storeImage(category:String,imageData:NSData, urlString:String) {
-		var key = category + "_" + urlString
-//	  	var fileManager = offlineManager.sharedManager()
+	func storeImageToDisk(category:String,imageData:NSData, urlString:String) {
 		DiskCache.sharedCache().groupName = category
 		DiskCache.sharedCache().setCache(imageData, forKey: urlString, withGroup: category)
-//		DiskCache.sharedCache().setCache(imageData, forKey: key)
 	}
-	
+	 
 	func getImageFromCacheForURL(category:String,urlString:String)-> UIImage? {
 		var imageData:NSData? = self.imageCache.objectForKey(urlString) as? NSData
 		if (imageData == nil) {

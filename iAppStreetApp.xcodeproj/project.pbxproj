@@ -24,7 +24,6 @@
 		4E58C92C1B5C16300082AED2 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4E58C9231B5C16300082AED2 /* Info.plist */; };
 		4E58C92D1B5C16300082AED2 /* Window.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E58C9251B5C16300082AED2 /* Window.swift */; };
 		4E58C92E1B5C16300082AED2 /* WindowRootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E58C9261B5C16300082AED2 /* WindowRootViewController.swift */; };
-		4E58C93D1B5CD8020082AED2 /* offlineManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E58C93C1B5CD8020082AED2 /* offlineManager.swift */; };
 		4E58C9421B5CD8200082AED2 /* DiskCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E58C93F1B5CD8200082AED2 /* DiskCache.m */; };
 		4E58C9431B5CD8200082AED2 /* NSString+MD5.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E58C9411B5CD8200082AED2 /* NSString+MD5.m */; };
 		4EFD5FBB1B5A74B900D91F91 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4EFD5FB91B5A74B900D91F91 /* Main.storyboard */; };
@@ -67,7 +66,6 @@
 		4E58C9251B5C16300082AED2 /* Window.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Window.swift; path = "Third Party/PKHUD/Window.swift"; sourceTree = "<group>"; };
 		4E58C9261B5C16300082AED2 /* WindowRootViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WindowRootViewController.swift; path = "Third Party/PKHUD/WindowRootViewController.swift"; sourceTree = "<group>"; };
 		4E58C9371B5C2E3C0082AED2 /* iAppStreetApp-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "iAppStreetApp-Bridging-Header.h"; sourceTree = "<group>"; };
-		4E58C93C1B5CD8020082AED2 /* offlineManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = offlineManager.swift; path = Utility/offlineManager.swift; sourceTree = "<group>"; };
 		4E58C93E1B5CD8200082AED2 /* DiskCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DiskCache.h; path = Utility/DiskCache.h; sourceTree = "<group>"; };
 		4E58C93F1B5CD8200082AED2 /* DiskCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DiskCache.m; path = Utility/DiskCache.m; sourceTree = "<group>"; };
 		4E58C9401B5CD8200082AED2 /* NSString+MD5.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSString+MD5.h"; path = "Utility/NSString+MD5.h"; sourceTree = "<group>"; };
@@ -121,7 +119,6 @@
 				4E58C9411B5CD8200082AED2 /* NSString+MD5.m */,
 				4E58C8F81B5C0E810082AED2 /* NetworkManager.swift */,
 				4E58C8F91B5C0E810082AED2 /* Paginator.swift */,
-				4E58C93C1B5CD8020082AED2 /* offlineManager.swift */,
 			);
 			name = Utility;
 			sourceTree = "<group>";
@@ -387,7 +384,6 @@
 				4E58C9431B5CD8200082AED2 /* NSString+MD5.m in Sources */,
 				4E58C9291B5C16300082AED2 /* HUDContentView.swift in Sources */,
 				4E58C9421B5CD8200082AED2 /* DiskCache.m in Sources */,
-				4E58C93D1B5CD8020082AED2 /* offlineManager.swift in Sources */,
 				4E58C8F71B5C0E6E0082AED2 /* PhotoViewController.swift in Sources */,
 				4E58C8FE1B5C0E9C0082AED2 /* iAppStreet_App.xcdatamodeld in Sources */,
 				4E58C9271B5C16300082AED2 /* FrameView.swift in Sources */,

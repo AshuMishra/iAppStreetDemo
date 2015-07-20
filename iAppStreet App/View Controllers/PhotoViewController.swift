@@ -86,7 +86,6 @@ extension PhotoViewController : UICollectionViewDataSource {
 							cell.flickerImageview.image = image
 							self.imageCache.setObject(image!, forKey:urlString)
 							println(cell.flickerImageview.image)
-
 						}
 						
 					})
@@ -192,6 +191,7 @@ extension PhotoViewController: UIScrollViewDelegate {
 								indexPaths.append(NSIndexPath(forItem: i, inSection: 0))
 							}
 							if indexPaths.count>0 {
+  
 								self.flickerCollectionView.insertItemsAtIndexPaths(indexPaths)
 							}
 							else {
