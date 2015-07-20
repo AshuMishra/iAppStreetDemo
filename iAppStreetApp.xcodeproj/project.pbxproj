@@ -24,6 +24,8 @@
 		4E58C92C1B5C16300082AED2 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4E58C9231B5C16300082AED2 /* Info.plist */; };
 		4E58C92D1B5C16300082AED2 /* Window.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E58C9251B5C16300082AED2 /* Window.swift */; };
 		4E58C92E1B5C16300082AED2 /* WindowRootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E58C9261B5C16300082AED2 /* WindowRootViewController.swift */; };
+		4E58C9361B5C2DA20082AED2 /* DiskCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E58C9351B5C2DA20082AED2 /* DiskCache.m */; };
+		4E58C93B1B5CB90F0082AED2 /* NSString+MD5.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E58C93A1B5CB90F0082AED2 /* NSString+MD5.m */; };
 		4EFD5FBB1B5A74B900D91F91 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4EFD5FB91B5A74B900D91F91 /* Main.storyboard */; };
 		4EFD5FBD1B5A74B900D91F91 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4EFD5FBC1B5A74B900D91F91 /* Images.xcassets */; };
 		4EFD5FC01B5A74B900D91F91 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4EFD5FBE1B5A74B900D91F91 /* LaunchScreen.xib */; };
@@ -74,12 +76,17 @@
 		4E58C9241B5C16300082AED2 /* PKHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PKHUD.h; path = "Third Party/PKHUD/PKHUD.h"; sourceTree = "<group>"; };
 		4E58C9251B5C16300082AED2 /* Window.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Window.swift; path = "Third Party/PKHUD/Window.swift"; sourceTree = "<group>"; };
 		4E58C9261B5C16300082AED2 /* WindowRootViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WindowRootViewController.swift; path = "Third Party/PKHUD/WindowRootViewController.swift"; sourceTree = "<group>"; };
-		4EFD5FAD1B5A74B900D91F91 /* iAppStreet App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "iAppStreet App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		4E58C9341B5C2DA20082AED2 /* DiskCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiskCache.h; sourceTree = "<group>"; };
+		4E58C9351B5C2DA20082AED2 /* DiskCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DiskCache.m; sourceTree = "<group>"; };
+		4E58C9371B5C2E3C0082AED2 /* iAppStreetApp-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "iAppStreetApp-Bridging-Header.h"; sourceTree = "<group>"; };
+		4E58C9391B5CB9000082AED2 /* NSString+MD5.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSString+MD5.h"; sourceTree = "<group>"; };
+		4E58C93A1B5CB90F0082AED2 /* NSString+MD5.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+MD5.m"; sourceTree = "<group>"; };
+		4EFD5FAD1B5A74B900D91F91 /* iAppStreetApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iAppStreetApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4EFD5FB11B5A74B900D91F91 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4EFD5FBA1B5A74B900D91F91 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		4EFD5FBC1B5A74B900D91F91 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		4EFD5FBF1B5A74B900D91F91 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
-		4EFD5FC51B5A74B900D91F91 /* iAppStreet AppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "iAppStreet AppTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		4EFD5FC51B5A74B900D91F91 /* iAppStreetAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = iAppStreetAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4EFD5FCA1B5A74B900D91F91 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4EFD5FCB1B5A74B900D91F91 /* iAppStreet_AppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iAppStreet_AppTests.swift; sourceTree = "<group>"; };
 		4EFD5FDB1B5A827700D91F91 /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
@@ -124,6 +131,11 @@
 		4E58C8F51B5C0D060082AED2 /* Utility */ = {
 			isa = PBXGroup;
 			children = (
+				4E58C9371B5C2E3C0082AED2 /* iAppStreetApp-Bridging-Header.h */,
+				4E58C9341B5C2DA20082AED2 /* DiskCache.h */,
+				4E58C9391B5CB9000082AED2 /* NSString+MD5.h */,
+				4E58C93A1B5CB90F0082AED2 /* NSString+MD5.m */,
+				4E58C9351B5C2DA20082AED2 /* DiskCache.m */,
 				4E58C8F81B5C0E810082AED2 /* NetworkManager.swift */,
 				4E58C8F91B5C0E810082AED2 /* Paginator.swift */,
 			);
@@ -161,8 +173,8 @@
 		4EFD5FAE1B5A74B900D91F91 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				4EFD5FAD1B5A74B900D91F91 /* iAppStreet App.app */,
-				4EFD5FC51B5A74B900D91F91 /* iAppStreet AppTests.xctest */,
+				4EFD5FAD1B5A74B900D91F91 /* iAppStreetApp.app */,
+				4EFD5FC51B5A74B900D91F91 /* iAppStreetAppTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -262,9 +274,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		4EFD5FAC1B5A74B900D91F91 /* iAppStreet App */ = {
+		4EFD5FAC1B5A74B900D91F91 /* iAppStreetApp */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 4EFD5FCF1B5A74B900D91F91 /* Build configuration list for PBXNativeTarget "iAppStreet App" */;
+			buildConfigurationList = 4EFD5FCF1B5A74B900D91F91 /* Build configuration list for PBXNativeTarget "iAppStreetApp" */;
 			buildPhases = (
 				9FB9FEE7EF62777EF87F68D7 /* Check Pods Manifest.lock */,
 				4EFD5FA91B5A74B900D91F91 /* Sources */,
@@ -278,14 +290,14 @@
 			);
 			dependencies = (
 			);
-			name = "iAppStreet App";
+			name = iAppStreetApp;
 			productName = "iAppStreet App";
-			productReference = 4EFD5FAD1B5A74B900D91F91 /* iAppStreet App.app */;
+			productReference = 4EFD5FAD1B5A74B900D91F91 /* iAppStreetApp.app */;
 			productType = "com.apple.product-type.application";
 		};
-		4EFD5FC41B5A74B900D91F91 /* iAppStreet AppTests */ = {
+		4EFD5FC41B5A74B900D91F91 /* iAppStreetAppTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 4EFD5FD21B5A74B900D91F91 /* Build configuration list for PBXNativeTarget "iAppStreet AppTests" */;
+			buildConfigurationList = 4EFD5FD21B5A74B900D91F91 /* Build configuration list for PBXNativeTarget "iAppStreetAppTests" */;
 			buildPhases = (
 				4EFD5FC11B5A74B900D91F91 /* Sources */,
 				4EFD5FC21B5A74B900D91F91 /* Frameworks */,
@@ -296,9 +308,9 @@
 			dependencies = (
 				4EFD5FC71B5A74B900D91F91 /* PBXTargetDependency */,
 			);
-			name = "iAppStreet AppTests";
+			name = iAppStreetAppTests;
 			productName = "iAppStreet AppTests";
-			productReference = 4EFD5FC51B5A74B900D91F91 /* iAppStreet AppTests.xctest */;
+			productReference = 4EFD5FC51B5A74B900D91F91 /* iAppStreetAppTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -320,7 +332,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 4EFD5FA81B5A74B900D91F91 /* Build configuration list for PBXProject "iAppStreet App" */;
+			buildConfigurationList = 4EFD5FA81B5A74B900D91F91 /* Build configuration list for PBXProject "iAppStreetApp" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -333,8 +345,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				4EFD5FAC1B5A74B900D91F91 /* iAppStreet App */,
-				4EFD5FC41B5A74B900D91F91 /* iAppStreet AppTests */,
+				4EFD5FAC1B5A74B900D91F91 /* iAppStreetApp */,
+				4EFD5FC41B5A74B900D91F91 /* iAppStreetAppTests */,
 			);
 		};
 /* End PBXProject section */
@@ -421,9 +433,11 @@
 				4E58C8FA1B5C0E810082AED2 /* NetworkManager.swift in Sources */,
 				4E58C9291B5C16300082AED2 /* HUDContentView.swift in Sources */,
 				4E58C8F71B5C0E6E0082AED2 /* PhotoViewController.swift in Sources */,
+				4E58C93B1B5CB90F0082AED2 /* NSString+MD5.m in Sources */,
 				4E58C8FE1B5C0E9C0082AED2 /* iAppStreet_App.xcdatamodeld in Sources */,
 				4E58C9271B5C16300082AED2 /* FrameView.swift in Sources */,
 				4E58C92E1B5C16300082AED2 /* WindowRootViewController.swift in Sources */,
+				4E58C9361B5C2DA20082AED2 /* DiskCache.m in Sources */,
 				4E58C9281B5C16300082AED2 /* HUDAssets.swift in Sources */,
 				4E58C8FB1B5C0E810082AED2 /* Paginator.swift in Sources */,
 				4E58C92D1B5C16300082AED2 /* Window.swift in Sources */,
@@ -443,7 +457,7 @@
 /* Begin PBXTargetDependency section */
 		4EFD5FC71B5A74B900D91F91 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 4EFD5FAC1B5A74B900D91F91 /* iAppStreet App */;
+			target = 4EFD5FAC1B5A74B900D91F91 /* iAppStreetApp */;
 			targetProxy = 4EFD5FC61B5A74B900D91F91 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -562,7 +576,8 @@
 				);
 				INFOPLIST_FILE = "iAppStreet App/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = iAppStreetApp;
+				SWIFT_OBJC_BRIDGING_HEADER = "/Users/susmitahorrow/Desktop/iAppStreet App/iAppStreet App/iAppStreetApp-Bridging-Header.h";
 			};
 			name = Debug;
 		};
@@ -577,7 +592,8 @@
 				);
 				INFOPLIST_FILE = "iAppStreet App/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = iAppStreetApp;
+				SWIFT_OBJC_BRIDGING_HEADER = "/Users/susmitahorrow/Desktop/iAppStreet App/iAppStreet App/iAppStreetApp-Bridging-Header.h";
 			};
 			name = Release;
 		};
@@ -595,7 +611,7 @@
 				);
 				INFOPLIST_FILE = "iAppStreet AppTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = iAppStreetAppTests;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/iAppStreet App.app/iAppStreet App";
 			};
 			name = Debug;
@@ -610,7 +626,7 @@
 				);
 				INFOPLIST_FILE = "iAppStreet AppTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = iAppStreetAppTests;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/iAppStreet App.app/iAppStreet App";
 			};
 			name = Release;
@@ -618,7 +634,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		4EFD5FA81B5A74B900D91F91 /* Build configuration list for PBXProject "iAppStreet App" */ = {
+		4EFD5FA81B5A74B900D91F91 /* Build configuration list for PBXProject "iAppStreetApp" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				4EFD5FCD1B5A74B900D91F91 /* Debug */,
@@ -627,7 +643,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		4EFD5FCF1B5A74B900D91F91 /* Build configuration list for PBXNativeTarget "iAppStreet App" */ = {
+		4EFD5FCF1B5A74B900D91F91 /* Build configuration list for PBXNativeTarget "iAppStreetApp" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				4EFD5FD01B5A74B900D91F91 /* Debug */,
@@ -636,7 +652,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		4EFD5FD21B5A74B900D91F91 /* Build configuration list for PBXNativeTarget "iAppStreet AppTests" */ = {
+		4EFD5FD21B5A74B900D91F91 /* Build configuration list for PBXNativeTarget "iAppStreetAppTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				4EFD5FD31B5A74B900D91F91 /* Debug */,

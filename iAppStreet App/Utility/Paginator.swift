@@ -52,6 +52,7 @@ class Paginator: NSObject {
 			self.finalResult = [String]()
 			isCallInProgress = false
 			
+
 			HUDController.sharedController.contentView = HUDContentView.ProgressView()
 			HUDController.sharedController.show()
 			
@@ -68,9 +69,11 @@ class Paginator: NSObject {
 				self.isCallInProgress = false
 			}
 		}else {
+			
 			self.showNetworkError()
 			HUDController.sharedController.hide(animated: true)
-			completionBlock(result: nil, error: nil, allPagesLoaded: false)
+			var error = NSError(domain: "Network error", code: 1, userInfo: nil)
+			completionBlock(result: nil, error: error, allPagesLoaded: false)
 			isCallInProgress = false
 		}
 		
@@ -86,7 +89,6 @@ class Paginator: NSObject {
 		if checkInternetConnection {
 			var params = parameters
 			params["page"] = String(self.pageCount++)
-			println("page number = \(self.pageCount)")
 			isCallInProgress = true
 			Alamofire.request(.GET, baseURL, parameters: params, encoding: ParameterEncoding.URL).responseJSON { (request, response, data , error) -> Void in
 				let jsonData = JSON(data!)
@@ -101,7 +103,7 @@ class Paginator: NSObject {
 			}
 			
 		}else {
-			self.showNetworkError()
+//			self.showNetworkError()
 			completionBlock(result: self.finalResult, error: nil, allPagesLoaded: false)
 			isCallInProgress = false
 		}

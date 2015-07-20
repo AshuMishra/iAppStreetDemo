@@ -8,18 +8,20 @@
 
 import UIKit
 
-class PhotoViewController: UIViewController {
+class PhotoViewController: UIViewController,UICollectionViewDelegateFlowLayout {
 
 	@IBOutlet weak var flickerSearchBar: UISearchBar!
 	@IBOutlet weak var flickerCollectionView: UICollectionView!
 	
 	private var searchArray = [String]()
+	let flickerFooterViewIdentifier = "flickerCollectionFooterFooterView"
 	
 	//MARK: ViewController LifeCycle Methods:-
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		// Do any additional setup after loading the view, typically from a nib.
+		self.initialSetup()
+				// Do any additional setup after loading the view, typically from a nib.
 	}
 	
 	override func viewWillAppear(animated: Bool) {
@@ -33,9 +35,20 @@ class PhotoViewController: UIViewController {
 
 
 
+//MARK: Custom Action Methods:-
 
+func initialSetup() {
+	let layout = UICollectionViewFlowLayout()
+	layout.footerReferenceSize = CGSize(width: self.flickerCollectionView!.bounds.size.width, height: 100.0)
+	self.flickerCollectionView!.registerClass(CollectionViewLoadingCell.classForCoder(), forSupplementaryViewOfKind: UICollectionElementKindSectionFooter, withReuseIdentifier: flickerFooterViewIdentifier)
+	
+	self.flickerCollectionView!.collectionViewLayout = layout
+	self.flickerCollectionView.hidden = true
+	self.view.backgroundColor = UIColor.blackColor()
+ }
 
 }
+
 //MARK: Data source  methods of UICollectionView
 extension PhotoViewController : UICollectionViewDataSource {
 	func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
@@ -49,14 +62,22 @@ extension PhotoViewController : UICollectionViewDataSource {
 	func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
 		let reuseIdentifier = "cellIdentifier"
 		let cell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseIdentifier, forIndexPath: indexPath) as! CustomFlickerCell
-		cell.backgroundColor = UIColor.greenColor()
-		cell.request?.cancel()
+		
 		if (searchArray.count > 0) {
 			let urlString:String = searchArray[indexPath.row]
-//			cell.configureCell(urlString)
-			cell.request = NetworkManager.sharedInstance.downloadImage(urlString, completionBlock: { (image, error) -> () in
+			var image = NetworkManager.sharedInstance.getImageFromCacheForURL(urlString)
+			if (image != nil) {
 				cell.flickerImageview.image = image
-			})
+			}
+			else {
+				cell.flickerImageview.image = nil
+				cell.request?.cancel()
+				cell.request = NetworkManager.sharedInstance.downloadImage(self.flickerSearchBar.text, urlString:urlString, completionBlock: { (image, error) -> () in
+					cell.flickerImageview.image = image
+					println(cell.flickerImageview.image)
+
+				})
+			}
 		}
 		
 		// Configure the cell
@@ -73,6 +94,7 @@ extension PhotoViewController : UICollectionViewDelegateFlowLayout {
 		let width = Int(UIScreen.mainScreen().bounds.size.width) - (intercellDistance * (numberOfCellPerRow-1)+inset * 2)
 		return CGSizeMake(CGFloat(width / numberOfCellPerRow), CGFloat(width / numberOfCellPerRow))
 	}
+	
 	func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAtIndex section: Int) -> UIEdgeInsets {
 		return UIEdgeInsetsMake(10,10, 0,10)
 	}
@@ -80,30 +102,47 @@ extension PhotoViewController : UICollectionViewDelegateFlowLayout {
 
 extension PhotoViewController : UICollectionViewDelegate {
 
-//	func collectionView(collectionView: UICollectionView, willDisplayCell cell: UICollectionViewCell, forItemAtIndexPath indexPath: NSIndexPath) {
-//		if NetworkManager.sharedInstance.paginator.isCallInProgress {
-//			return
-//		}
-//		 NetworkManager.sharedInstance.paginator.loadNext { (result, error, allPagesLoaded) -> () in
-//			self.searchArray = result!
-//			self.flickerCollectionView.reloadData()
-//		}
+  func collectionView(collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, atIndexPath indexPath: NSIndexPath) -> UICollectionReusableView {
+//	if self.searchArray.count==0 {
+//		self.flickerCollectionView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
 //	}
-// 
+	return self.flickerCollectionView.dequeueReusableSupplementaryViewOfKind(kind, withReuseIdentifier: flickerFooterViewIdentifier, forIndexPath: indexPath) as! UICollectionReusableView
+	}
+
 }
 
-
+class CollectionViewLoadingCell: UICollectionReusableView {
+	let spinner = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.WhiteLarge)
+	
+	required init(coder aDecoder: NSCoder) {
+		super.init(coder: aDecoder)
+	}
+	
+	override init(frame: CGRect) {
+		super.init(frame: frame)
+		
+		spinner.startAnimating()
+		spinner.center = self.center
+		addSubview(spinner)
+	}
+}
 //MARK: SearchBar Delegate Methods:-
 
 extension PhotoViewController : UISearchBarDelegate {
 	func searchBarSearchButtonClicked(searchBar: UISearchBar) {
-		 println("searching image")
 		 self.searchArray.removeAll(keepCapacity: true)
 		 NetworkManager.sharedInstance.updatePaginator(searchBar.text)
 		 NetworkManager.sharedInstance.paginator.loadFirst { (result, error, allPagesLoaded) -> () in
+		 if (error == nil) {
 			self.searchArray = result!
+			self.flickerCollectionView.hidden = false
+			self.flickerCollectionView.reloadData()
+		}else {
+			println("keys +\(NetworkManager.sharedInstance.diskCache.allKeys())")
+			self.searchArray = NetworkManager.sharedInstance.diskCache.allKeys() as! [String]
 			self.flickerCollectionView.reloadData()
 		}
+	  }
 	}
 }
 
@@ -119,7 +158,6 @@ extension PhotoViewController: UIScrollViewDelegate {
 		var h = size.height;
 		var reload_distance:CGFloat = 10.0;
 		if(y > (size.height + reload_distance)) {
-			println("load more")
 			if (!NetworkManager.sharedInstance.paginator.isCallInProgress) {
 						 NetworkManager.sharedInstance.paginator.loadNext { (result, error, allPagesLoaded) -> () in
 						 	var prevCount = self.searchArray.count
@@ -127,7 +165,6 @@ extension PhotoViewController: UIScrollViewDelegate {
 							self.searchArray = result!
 							var indexPaths = [NSIndexPath]()
 							for (var i = prevCount ; i < self.searchArray.count ; i++) {
-							println("i = \(i)")
 								indexPaths.append(NSIndexPath(forItem: i, inSection: 0))
 							}
 							self.flickerCollectionView.insertItemsAtIndexPaths(indexPaths)
